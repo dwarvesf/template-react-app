@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 
 const render = Component => {
-  ReactDOM.render(<Component />, document.getElementById('root'));
+  ReactDOM.render(<Component />, document.getElementById('app'));
 };
 
 render(App);
