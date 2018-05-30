@@ -18,7 +18,7 @@ npm i -g sao
 ### From git
 
 ```bash
-sao dwarvesf/template-react-app my-project
+sao dwarvesf/template-react-app -u my-project
 ```
 
 ## License
