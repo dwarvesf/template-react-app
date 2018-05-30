@@ -1,0 +1,22 @@
+{
+  "name": "template-react-app",
+  "version": "0.0.0",
+  "description": "React template for web app",
+  "repository": {
+    "url": "dwarvesf/template-react-app",
+    "type": "git"
+  },
+  "author": "dwarvesf <gnhuy91@gmail.com> (github.com/dwarvesf)",
+  "license": "MIT",
+  "files": [
+    "sao.js",
+    "template"
+  ],
+  "scripts": {
+    "test": "ava"
+  },
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "sao": "^0.22.1"
+  }
+}

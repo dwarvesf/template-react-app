@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="shortcut icon" href="<%%= htmlWebpackPlugin.files.publicPath %%>favicon.ico">
+    <title><%%= htmlWebpackPlugin.options.title %%></title>
+
+    <% if (pwa) { %>
+    <link rel="manifest" href="<%%= htmlWebpackPlugin.files.publicPath %%>manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <% } %>
+
+    <%% if (htmlWebpackPlugin.options.description) { %%>
+    <meta name="description" content="<%%= htmlWebpackPlugin.options.description %%>"/>
+    <%% } %%>
+
+    <%% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %%>
+    <link rel="<%%= chunk.initial?'preload':'prefetch' %%>" href="<%%= htmlWebpackPlugin.files.publicPath + file %%>" as="<%%= file.match(/\.css$/)?'style':'script' %%>">
+    <%% }}} %%>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="app"></div>
+  </body>
+</html>
