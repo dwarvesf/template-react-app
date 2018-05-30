@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 
 import './styles';
 import App from './App';
+import { setupRouter } from './router';
 
-const render = Component => {
-  ReactDOM.render(<Component />, document.getElementById('app'));
+const makeRender = () => ({ router }) => {
+  ReactDOM.render(<App router={router} />, document.getElementById('app'));
 };
 
-render(App);
+const router = setupRouter();
+router.respond(makeRender());
