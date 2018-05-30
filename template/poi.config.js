@@ -1,4 +1,6 @@
+<% if(tailwindcss) { %>
 const PurgecssPlugin = require('./purgecss.config');
+<% } %>
 
 module.exports = {
   env: true,
@@ -9,7 +11,9 @@ module.exports = {
   ],
   configureWebpack(config) {
     if (config.mode === 'production') {
+      <% if(tailwindcss) { %>
       config.plugins.push(PurgecssPlugin);
+      <% } %>
     }
 
     return config;

@@ -1,5 +1,7 @@
 // https://sao.js.org/#/create?id=config-file
 
+const { exec } = require('child_process');
+
 module.exports = {
   prompts: {
     name: {
@@ -9,6 +11,11 @@ module.exports = {
     description: {
       message: 'How would you describe the new project?',
       default: 'my web project',
+    },
+    tailwindcss: {
+      message: 'TailwindCSS?',
+      type: 'confirm',
+      default: true,
     },
     pwa: {
       message: 'PWA support?',
@@ -23,6 +30,8 @@ module.exports = {
   },
   filters: {
     'static/manifest.json': 'pwa',
+    'tailwind.js': 'tailwindcss',
+    'src/styles/tailwind.scss': 'tailwindcss',
   },
   move: {
     gitignore: '.gitignore',
@@ -30,4 +39,15 @@ module.exports = {
   showTip: true,
   gitInit: true,
   installDependencies: true,
+  post(context, stream) {
+    // run eslint --fix
+    exec(`cd ${context.folderName} && yarn lint:fix`, (err, stdout, stderr) => {
+      if (err) {
+        console.log(err.message);
+        return;
+      }
+      stdout && console.log(stdout);
+      stderr && console.log(stderr);
+    })
+  },
 };
