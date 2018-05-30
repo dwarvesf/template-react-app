@@ -1,3 +1,5 @@
+// https://sao.js.org/#/create?id=config-file
+
 module.exports = {
   prompts: {
     name: {
@@ -14,9 +16,9 @@ module.exports = {
       default: true,
     },
   },
-  data({ username }) {
+  data({ username = 'dwarvesf' }) {
     return {
-      website: `github.com/dwarvesf`,
+      website: `github.com/${username}`,
     };
   },
   filters: {
@@ -28,8 +30,4 @@ module.exports = {
   showTip: true,
   gitInit: true,
   installDependencies: true,
-  post(context, stream) {
-    console.log(context)
-    console.log(stream)
-  },
 };
