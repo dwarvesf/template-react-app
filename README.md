@@ -2,8 +2,10 @@
 
 > React template for web app, powered by [Poi](https://poi.js.org/).
 
-- [x] prettier + eslint
-- [x] PWA
+- [x] [prettier](https://github.com/prettier/prettier) + eslint
+- [x] PWA support (by [offline-plugin](https://github.com/NekR/offline-plugin))
+- [x] [TailwindCSS](https://tailwindcss.com/) & SASS
+- [x] Routing & code splitting (by [curi](https://github.com/pshrmn/curi))
 
 ## Usage
 

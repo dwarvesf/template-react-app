@@ -7,7 +7,12 @@
     "lint": "eslint --ext .js,.jsx --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore ."
   },
-  "dependencies": {<% if (pwa) { %>
+  "dependencies": {<% if (routing) { %>
+    "@curi/core": "^1.0.0-beta.35",
+    "@curi/react": "^1.0.0-beta.26",
+    "@curi/route-active": "^1.0.0-beta.6",
+    "@hickory/browser": "^1.0.0-beta.7",<% } %>
+    "loadable-components": "2.2.2",<% if (pwa) { %>
     "offline-plugin": "^5.0.3",<% } %>
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
@@ -34,5 +39,9 @@
     "react-hot-loader": "^4.2.0",
     "sass-loader": "^6.0.7"<% if(tailwindcss) { %>,
     "tailwindcss": "^0.5.3"<% } %>
+  },
+  "resolutions": {
+    "react": "16.4.0",
+    "react-dom": "16.4.0"
   }
 }
