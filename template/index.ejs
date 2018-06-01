@@ -9,7 +9,11 @@
 
     <% if (pwa) { %>
     <link rel="manifest" href="<%%= htmlWebpackPlugin.files.publicPath %%>manifest.json">
-    <meta name="theme-color" content="#ffffff">
+    <script
+      async
+      src="https://cdn.rawgit.com/GoogleChrome/pwacompat/v2.0.2/pwacompat.min.js"
+      integrity="sha384-Hed93irwedHCADsxBJAVmlSMiqpE9BIQPp1XK7tqJh5olTEJTCJnlE7wRU3IDOz9"
+      crossorigin="anonymous"></script>
     <% } %>
 
     <%% if (htmlWebpackPlugin.options.description) { %%>
