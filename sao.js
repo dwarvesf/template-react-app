@@ -17,11 +17,6 @@ module.exports = {
       type: 'confirm',
       default: true,
     },
-    routing: {
-      message: 'Routing?',
-      type: 'confirm',
-      default: true,
-    },
     pwa: {
       message: 'PWA support?',
       type: 'confirm',
@@ -37,9 +32,6 @@ module.exports = {
     'static/manifest.json': 'pwa',
     'tailwind.js': 'tailwindcss',
     'src/styles/tailwind.scss': 'tailwindcss',
-    'src/pages/**': 'routing',
-    'src/router/**': 'routing',
-    'src/App.css': '!routing',
   },
   move: {
     gitignore: '.gitignore',

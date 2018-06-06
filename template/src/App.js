@@ -1,39 +1,43 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
-<% if(routing) { %>
-import { CuriProvider } from '@curi/react';
+import { connect } from 'redux-bundler-react';
+import navHelper from 'internal-nav-helper';
 
-const App = ({ router }) => {
+const navItems = [
+  { url: '/', label: 'Home' },
+  { url: '/about', label: 'About' },
+  { url: '/xyz', label: 'xyz' },
+];
+
+const App = ({ doUpdateUrl, pathname, route: Page }) => {
   return (
-    <CuriProvider router={router}>
-      {({ response, router }) => {
-        return (
-          <main>
-            <response.body
-              params={response.params}
-              location={response.location}
-              router={router}
-            />
-          </main>
-        );
-      }}
-    </CuriProvider>
+    <main onClick={navHelper(doUpdateUrl)}>
+      <nav className="p-3 mb-4">
+        <ul className="list-reset text-center">
+          {navItems.map(item => {
+            return (
+              <li key={item.url} className="inline-block">
+                <a
+                  href={item.url}
+                  className={`no-underline inline-block mr-1 p-2 text-blue hover:text-blue-darker ${
+                    item.url === pathname ? 'bg-blue-lighter' : ''
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      <Page />
+    </main>
   );
 };
-<% } else { %>
-import './App.css';
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Welcome to React</h1>
-      </header>
-      <p className="App-intro text-xl">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-    </div>
-  );
-};
-<% } %>
-export default hot(module)(App);
+export default hot(module)(connect(
+  'selectRoute',
+  'selectPathname',
+  'doUpdateUrl',
+  App,
+));

@@ -17,6 +17,8 @@
     "offline-plugin": "^5.0.3",<% } %>
     "react": "^16.6.1",
     "react-dom": "^16.6.1"
+    "redux-bundler": "^21.2.1",
+    "redux-bundler-react": "^1.0.0"
   },
   "devDependencies": {
     "@poi/plugin-bundle-report": "^10.0.1",

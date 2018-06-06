@@ -1,21 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'redux-bundler-react';
 
 import './styles';
-import App from './App';<% if(routing) { %>
-import { setupRouter } from './router';
+import App from './App';
+import getStore from './bundles';
+import cache from './utils/cache';
 
-const makeRender = () => ({ router }) => {
-  ReactDOM.render(<App router={router} />, document.getElementById('app'));
+const render = ({ store }) => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('app'),
+  );
 };
 
-const router = setupRouter();
-router.respond(makeRender());
-<% } else { %>
-
-const render = Component => {
-  ReactDOM.render(<Component />, document.getElementById('app'));
-};
-
-render(App);
-<% } %>
+// this is entirely optional, but here we here we try to pull starting data
+// from our local cache. We're using a util called money-clip here that
+// will only return if the version number is a match and it's not
+// older than the specified maxAge.
+cache.getAll().then(initialData => {
+  if (initialData) {
+    console.log('starting with locally cache data:', initialData);
+  }
+  render({ store: getStore(initialData) });
+});
