@@ -6,6 +6,7 @@ module.exports = {
   env: true,
   entry: 'src/index.js',
   plugins: [
+    require('@poi/plugin-bundle-report')(),
     require('@poi/plugin-eslint')(),<% if(pwa) { %>
     require('@poi/plugin-offline')(),<% } %>
   ],

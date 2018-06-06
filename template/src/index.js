@@ -12,6 +12,7 @@ const makeRender = () => ({ router }) => {
 const router = setupRouter();
 router.respond(makeRender());
 <% } else { %>
+
 const render = Component => {
   ReactDOM.render(<Component />, document.getElementById('app'));
 };
