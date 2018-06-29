@@ -1,12 +1,14 @@
 import { composeBundles, createUrlBundle, createCacheBundle } from 'redux-bundler';
 
-import routes from './routes';
-import extraArgs from './extra-args';
 import cache from '@/utils/cache';
+import extraArgs from './extra-args';
+import routes from './routes';<% if (i18n) { %>
+import localize from './localize';<% } %>
 
 export default composeBundles(
   createUrlBundle(),
   routes,
   createCacheBundle(cache.set),
-  extraArgs,
+  extraArgs,<% if (i18n) { %>
+  localize,<% } %>
 );

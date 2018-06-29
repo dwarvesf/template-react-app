@@ -17,6 +17,11 @@ module.exports = {
       type: 'confirm',
       default: true,
     },
+    i18n: {
+      message: 'i18n?',
+      type: 'confirm',
+      default: false,
+    },
     pwa: {
       message: 'PWA support?',
       type: 'confirm',
@@ -32,6 +37,8 @@ module.exports = {
     'static/manifest.json': 'pwa',
     'tailwind.js': 'tailwindcss',
     'src/styles/tailwind.scss': 'tailwindcss',
+    'src/bundles/localize.js': 'i18n',
+    'src/translations/**': 'i18n',
   },
   move: {
     gitignore: '.gitignore',

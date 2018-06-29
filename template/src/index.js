@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'redux-bundler-react';
+import { Provider } from 'redux-bundler-react';<% if (i18n) { %>
+import { LocalizeProvider } from 'react-localize-redux';<% } %>
 
 import './styles';
 import App from './App';
@@ -8,9 +9,11 @@ import getStore from './bundles';
 import cache from './utils/cache';
 
 const render = ({ store }) => {
+  let app = <App />;<% if (i18n) { %>
+  app = <LocalizeProvider store={store}>{app}</LocalizeProvider>;<% } %>
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      {app}
     </Provider>,
     document.getElementById('app'),
   );
