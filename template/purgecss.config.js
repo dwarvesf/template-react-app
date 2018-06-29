@@ -1,3 +1,4 @@
+const path = require('path');
 const glob = require('glob');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const PurgecssWhitelister = require('purgecss-whitelister');
@@ -7,13 +8,16 @@ const PurgecssWhitelister = require('purgecss-whitelister');
 // https://github.com/FullHuman/purgecss#extractor
 class TailwindExtractor {
   static extract(content) {
-    return content.match(/[A-z0-9-:/]+/g) || [];
+    const matches = content.match(/[A-z0-9-:/]+/g) || [];
+    // remove back ticks
+    // https://github.com/FullHuman/purgecss-webpack-plugin/issues/32
+    return matches.map(s => s.replace('`', ''));
   }
 }
 
 module.exports = new PurgecssPlugin({
   // files to scan for class names.
-  paths: glob.sync('src/**/*.js'),
+  paths: glob.sync(path.join(__dirname, './src/**/*.js')),
   extractors: [
     {
       extractor: TailwindExtractor,
