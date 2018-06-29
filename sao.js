@@ -49,7 +49,7 @@ module.exports = {
   installDependencies: true,
   post(context, stream) {
     // run eslint --fix
-    exec(`cd ${context.folderName} && yarn lint:fix`, (err, stdout, stderr) => {
+    exec(`cd ${context.folderPath} && yarn lint:fix`, (err, stdout, stderr) => {
       if (err) {
         console.log(err.message);
         return;
