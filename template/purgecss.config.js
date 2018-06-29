@@ -8,10 +8,7 @@ const PurgecssWhitelister = require('purgecss-whitelister');
 // https://github.com/FullHuman/purgecss#extractor
 class TailwindExtractor {
   static extract(content) {
-    const matches = content.match(/[A-z0-9-:/]+/g) || [];
-    // remove back ticks
-    // https://github.com/FullHuman/purgecss-webpack-plugin/issues/32
-    return matches.map(s => s.replace('`', ''));
+    return content.match(/[A-Za-z0-9-_:/]+/g) || [];
   }
 }
 
