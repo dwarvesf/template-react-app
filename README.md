@@ -25,4 +25,4 @@ sao dwarvesf/template-react-app -u my-project
 
 ## License
 
-MIT &copy; [dwarvesf](github.com/dwarvesf)
+MIT &copy; [Dwarves Foundation](https://github.com/dwarvesf)
