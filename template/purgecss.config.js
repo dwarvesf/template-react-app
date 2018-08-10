@@ -22,5 +22,7 @@ module.exports = new PurgecssPlugin({
     },
   ],
   whitelist: ['html', 'body'].concat(PurgecssWhitelister([])),
-  whitelistPatterns: [],
+  whitelistPatterns: [
+    /^module__*/, // css module
+  ],
 });
