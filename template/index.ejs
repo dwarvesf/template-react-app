@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="shortcut icon" href="<%%= htmlWebpackPlugin.files.publicPath %%>favicon.ico">
     <title><%%= htmlWebpackPlugin.options.title %%></title>
-
     <% if (pwa) { %>
     <link rel="manifest" href="<%%= htmlWebpackPlugin.files.publicPath %%>manifest.json">
     <script
@@ -15,11 +14,9 @@
       integrity="sha384-Hed93irwedHCADsxBJAVmlSMiqpE9BIQPp1XK7tqJh5olTEJTCJnlE7wRU3IDOz9"
       crossorigin="anonymous"></script>
     <% } %>
-
     <%% if (htmlWebpackPlugin.options.description) { %%>
     <meta name="description" content="<%%= htmlWebpackPlugin.options.description %%>"/>
     <%% } %%>
-
     <%% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %%>
