@@ -10,7 +10,7 @@ module.exports = {
     },
     description: {
       message: 'How would you describe the new project?',
-      default: 'my web project',
+      default: 'My web project',
     },
     tailwindcss: {
       message: 'TailwindCSS?',
@@ -25,7 +25,7 @@ module.exports = {
     pwa: {
       message: 'PWA support?',
       type: 'confirm',
-      default: true,
+      default: false,
     },
   },
   data({ username = 'dwarvesf' }) {
@@ -45,11 +45,11 @@ module.exports = {
     gitignore: '.gitignore',
   },
   showTip: true,
-  gitInit: true,
+  gitInit: false,
   installDependencies: true,
   post(context, stream) {
     // run eslint --fix
-    exec(`cd ${context.folderPath} && yarn lint:fix`, (err, stdout, stderr) => {
+    exec(`cd ${context.folderPath} && npm run lint:fix`, (err, stdout, stderr) => {
       if (err) {
         console.log(err.message);
         return;

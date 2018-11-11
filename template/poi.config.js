@@ -1,6 +1,5 @@
-<% if(tailwindcss) { %>
-const PurgecssPlugin = require('./purgecss.config');
-<% } %>
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   env: true,
@@ -11,6 +10,7 @@ module.exports = {
     require('@poi/plugin-offline')(),<% } %>
   ],
   chainWebpack(config) {
+    // prefixes css module classes with 'module__'
     ['css', 'scss', 'sass', 'less', 'stylus'].forEach(lang => {
       config.module
         .rule(lang)
@@ -21,14 +21,54 @@ module.exports = {
           localIdentName: 'module__[local]_[hash:base64:8]',
         }));
     });
+
+    const isEnvProduction = config.get('mode') === 'production';
+    if (isEnvProduction) {
+      <% if(tailwindcss) { %>
+      // PurgeCSS plugin
+      config
+        .plugin('purgecss')
+        .use(require('purgecss-webpack-plugin'), [
+          require('./purgecss.config'),
+        ]);<% } %>
+      // replace UglifyJS with Terser, similar to create-react-app
+      config.plugins.delete('uglifyjs');
+      config.optimization.minimize(isEnvProduction);
+      config.optimization.minimizer([
+        new TerserPlugin({
+          terserOptions: {
+            parse: {
+              ecma: 8,
+            },
+            compress: {
+              ecma: 5,
+              warnings: false,
+              comparisons: false,
+              inline: 2,
+            },
+            mangle: {
+              safari10: true,
+            },
+            output: {
+              ecma: 5,
+              comments: false,
+              ascii_only: true,
+            },
+          },
+          parallel: true,
+          cache: true,
+          sourceMap: false,
+        }),
+        new OptimizeCSSAssetsPlugin({
+          cssProcessorOptions: {
+            parser: require('postcss-safe-parser'),
+            map: false,
+          },
+        }),
+      ]);
+    }
   },
   configureWebpack(config) {
-    if (config.mode === 'production') {
-      <% if(tailwindcss) { %>
-      config.plugins.push(PurgecssPlugin);
-      <% } %>
-    }
-
     return config;
   },
 }

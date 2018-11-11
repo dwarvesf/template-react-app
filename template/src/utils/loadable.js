@@ -1,3 +1,3 @@
-import loadable from 'loadable-components';
+import loadable from '@loadable/component';
 
 export default loadable;

@@ -8,6 +8,11 @@ module.exports = {
     'prettier/standard',
   ],
   plugins: ['react', 'prettier', 'standard'],
+  settings: {
+    react: {
+      version: '16.0',
+    },
+  },
   parserOptions: {
     sourceType: 'module',
     ecmaFeatures: {

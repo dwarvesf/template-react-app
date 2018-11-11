@@ -1,6 +1,5 @@
 {
   "name": "<%= _.folderName %>",
-  "private": true,
   "scripts": {
     "dev": "poi",
     "build": "poi build",
@@ -14,17 +13,17 @@
     "@curi/react": "^1.0.0-beta.26",
     "@curi/route-active": "^1.0.0-beta.6",
     "@hickory/browser": "^1.0.0-beta.7",<% } %>
-    "loadable-components": "2.2.2",<% if (pwa) { %>
+    "@loadable/component": "^5.0.1",<% if (pwa) { %>
     "offline-plugin": "^5.0.3",<% } %>
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
   },
   "devDependencies": {
     "@poi/plugin-bundle-report": "^10.0.1",
     "@poi/plugin-eslint": "^10.0.2",<% if (pwa) { %>
     "@poi/plugin-offline": "^10.0.1",<% } %>
     "babel-eslint": "^8.2.3",
-    "babel-preset-poi": "^10.0.1",
+    "babel-preset-poi": "^10.0.2",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
@@ -35,17 +34,20 @@
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "node-sass": "^4.9.0",
-    "poi": "^10.2.9",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "poi": "^10.2.10",
     "postcss-flexbugs-fixes": "^3.3.0",
+    "postcss-safe-parser": "^4.0.1",
     "purgecss-webpack-plugin": "^1.2.0",
     "purgecss-whitelister": "^2.1.0",
     "react-hot-loader": "^4.3.0",
     "sass-loader": "^6.0.7",
-    "serve": "^7.2.0"<% if(tailwindcss) { %>,
-    "tailwindcss": "^0.5.3"<% } %>
+    "serve": "^10.0.2",<% if(tailwindcss) { %>
+    "tailwindcss": "^0.7.2",<% } %>
+    "terser-webpack-plugin": "^1.1.0"
   },
   "resolutions": {
-    "react": "16.4.0",
-    "react-dom": "16.4.0"
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
   }
 }

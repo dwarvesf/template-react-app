@@ -1,6 +1,5 @@
 const path = require('path');
 const glob = require('glob');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
 const PurgecssWhitelister = require('purgecss-whitelister');
 
 // Custom PurgeCSS extractor for Tailwind that allows special characters in
@@ -12,7 +11,7 @@ class TailwindExtractor {
   }
 }
 
-module.exports = new PurgecssPlugin({
+module.exports = {
   // files to scan for class names.
   paths: glob.sync(path.join(__dirname, './src/**/*.js')),
   extractors: [
@@ -25,4 +24,4 @@ module.exports = new PurgecssPlugin({
   whitelistPatterns: [
     /^module__*/, // css module
   ],
-});
+};

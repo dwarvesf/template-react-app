@@ -12,9 +12,9 @@
 Install [SAO](https://github.com/egoist/sao) first.
 
 ```bash
-yarn global add sao
-# or
 npm i -g sao
+# or
+yarn global add sao
 ```
 
 ### From git
