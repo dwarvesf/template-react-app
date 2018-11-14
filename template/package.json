@@ -9,7 +9,9 @@
     "lint:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@loadable/component": "^5.0.1",<% if (pwa) { %>
+    "@loadable/component": "^5.0.1",
+    "internal-nav-helper": "^1.0.2",
+    "money-clip": "^2.0.2",<% if (pwa) { %>
     "offline-plugin": "^5.0.3",<% } %>
     "react": "^16.6.1",
     "react-dom": "^16.6.1",<% if (i18n) { %>
