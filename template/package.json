@@ -15,8 +15,7 @@
     "offline-plugin": "^5.0.3",<% } %>
     "react": "^16.6.1",
     "react-dom": "^16.6.1",<% if (i18n) { %>
-    "react-localize-redux": "^3.2.0",
-    "redux": "^4.0.0",<% } %>
+    "react-localize-redux": "^3.2.0",<% } %>
     "redux-bundler": "^21.2.2",
     "redux-bundler-react": "^1.0.1"
   },
