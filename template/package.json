@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@loadable/component": "^5.0.1",
-    "internal-nav-helper": "^1.0.2",
+    "internal-nav-helper": "^1.1.0",
     "money-clip": "^2.0.2",<% if (pwa) { %>
     "offline-plugin": "^5.0.3",<% } %>
     "react": "^16.6.1",
@@ -23,6 +23,7 @@
     "@poi/plugin-bundle-report": "^10.0.1",
     "@poi/plugin-eslint": "^10.0.2",<% if (pwa) { %>
     "@poi/plugin-offline": "^10.0.1",<% } %>
+    "@svgr/webpack": "^4.1.0",
     "babel-eslint": "^8.2.3",
     "babel-preset-poi": "^10.0.2",
     "eslint": "^4.19.1",
@@ -42,6 +43,7 @@
     "purgecss-webpack-plugin": "^1.2.0",
     "purgecss-whitelister": "^2.1.0",
     "react-hot-loader": "^4.3.0",
+    "react-hot-loader-loader": "^0.0.6",
     "sass-loader": "^6.0.7",
     "serve": "^10.0.2",<% if(tailwindcss) { %>
     "tailwindcss": "^0.7.2",<% } %>

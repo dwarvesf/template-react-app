@@ -1,3 +1,4 @@
+const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -10,6 +11,9 @@ module.exports = {
     require('@poi/plugin-offline')(),<% } %>
   ],
   chainWebpack(config) {
+    // remove default svg loader
+    config.module.rules.delete('svg');
+
     // prefixes css module classes with 'module__'
     ['css', 'scss', 'sass', 'less', 'stylus'].forEach(lang => {
       config.module
@@ -69,6 +73,42 @@ module.exports = {
     }
   },
   configureWebpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ({ resource }) => [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  cleanupIDs: {
+                    prefix: `svg_${path.parse(resource).name}_${Math.random()
+                      .toString(36)
+                      .substr(2, 5)}_`,
+                  },
+                },
+              ],
+            },
+          },
+        },
+        'url-loader',
+      ],
+    });
+
+    if (config.mode === 'development') {
+      config.module.rules.push({
+        // match files to receive react-hot-loader functionality
+        test: /\.(js|jsx)$/,
+        include: [
+          path.resolve(__dirname, 'src/App.js'),
+          path.resolve(__dirname, 'src/pages'),
+        ],
+        loader: require.resolve('react-hot-loader-loader'),
+        enforce: 'post',
+      });
+    }
+
     return config;
   },
 }

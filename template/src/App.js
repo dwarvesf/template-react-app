@@ -1,5 +1,4 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 import { connect } from 'redux-bundler-react';
 import navHelper from 'internal-nav-helper';
 
@@ -35,9 +34,9 @@ const App = ({ doUpdateUrl, pathname, route: Page }) => {
   );
 };
 
-export default hot(module)(connect(
+export default connect(
   'selectRoute',
   'selectPathname',
   'doUpdateUrl',
   App,
-));
+);
