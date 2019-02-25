@@ -3,12 +3,19 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  env: true,
   entry: 'src/index.js',
   plugins: [
-    require('@poi/plugin-bundle-report')(),
-    require('@poi/plugin-eslint')(),<% if(pwa) { %>
-    require('@poi/plugin-offline')(),<% } %>
+    {
+      resolve: '@poi/plugin-eslint',
+    },
+    {
+      resolve: '@poi/bundle-report',
+      options: { analyzerMode: 'static' },
+    },<% if(pwa) { %>
+    {
+      resolve: '@poi/plugin-pwa',
+      options: {},
+    },<% } %>
   ],
   chainWebpack(config) {
     // remove default svg loader
@@ -18,11 +25,11 @@ module.exports = {
     ['css', 'scss', 'sass', 'less', 'stylus'].forEach(lang => {
       config.module
         .rule(lang)
-        .oneOf('module-ext')
+        .oneOf('normal-modules')
         .use('css-loader')
         .tap(option => ({
           ...option,
-          localIdentName: 'module__[local]_[hash:base64:8]',
+          localIdentName: 'module__[path][name]__[local]--[hash:base64:5]',
         }));
     });
 
@@ -38,38 +45,44 @@ module.exports = {
       // replace UglifyJS with Terser, similar to create-react-app
       config.plugins.delete('uglifyjs');
       config.optimization.minimize(isEnvProduction);
-      config.optimization.minimizer([
-        new TerserPlugin({
-          terserOptions: {
-            parse: {
-              ecma: 8,
+      config.optimization
+        .minimizer('terser')
+        .use(TerserPlugin, [
+          {
+            terserOptions: {
+              parse: {
+                ecma: 8,
+              },
+              compress: {
+                ecma: 5,
+                warnings: false,
+                comparisons: false,
+                inline: 2,
+              },
+              mangle: {
+                safari10: true,
+              },
+              output: {
+                ecma: 5,
+                comments: false,
+                ascii_only: true,
+              },
             },
-            compress: {
-              ecma: 5,
-              warnings: false,
-              comparisons: false,
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
-            output: {
-              ecma: 5,
-              comments: false,
-              ascii_only: true,
+            parallel: true,
+            cache: true,
+            sourceMap: false,
+          },
+        ])
+        .end()
+        .minimizer('css')
+        .use(OptimizeCSSAssetsPlugin, [
+          {
+            cssProcessorOptions: {
+              parser: require('postcss-safe-parser'),
+              map: false,
             },
           },
-          parallel: true,
-          cache: true,
-          sourceMap: false,
-        }),
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
-            parser: require('postcss-safe-parser'),
-            map: false,
-          },
-        }),
-      ]);
+        ]);
     }
   },
   configureWebpack(config) {

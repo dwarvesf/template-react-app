@@ -1,5 +1,5 @@
 {
-  "presets": ["poi"],
+  "presets": ["poi/babel"],
   "plugins": [
     "react-hot-loader/babel"
   ]
