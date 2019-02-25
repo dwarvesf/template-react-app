@@ -6,7 +6,8 @@ import { LocalizeProvider } from 'react-localize-redux';<% } %>
 import './styles';
 import App from './App';
 import getStore from './bundles';
-import cache from './utils/cache';
+import cache from './utils/cache';<% if (pwa) { %>
+import registerSW from './registerSW';<% } %>
 
 const render = ({ store }) => {
   let app = <App />;<% if (i18n) { %>
@@ -29,3 +30,7 @@ cache.getAll().then(initialData => {
   }
   render({ store: getStore(initialData) });
 });
+
+<% if (pwa) { %>if (process.env.NODE_ENV === 'production') {
+  registerSW();
+}<% } %>

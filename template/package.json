@@ -17,7 +17,8 @@
     "react-dom": "^16.8.3",<% if (i18n) { %>
     "react-localize-redux": "^3.2.0",<% } %>
     "redux-bundler": "^23.1.0",
-    "redux-bundler-react": "^1.1.0"
+    "redux-bundler-react": "^1.1.0",<% if (pwa) { %>
+    "register-service-worker": "^1.6.2"<% } %>
   },
   "devDependencies": {
     "@poi/plugin-bundle-report": "^12.1.0",
@@ -44,7 +45,7 @@
     "react-hot-loader": "^4.6.3",
     "react-hot-loader-loader": "^0.0.7",
     "sass-loader": "^6.0.7",
-    "serve": "^10.0.2",<% if(tailwindcss) { %>
+    "serve": "^10.0.2",<% if (tailwindcss) { %>
     "tailwindcss": "^0.7.2",<% } %>
     "terser-webpack-plugin": "^1.1.0"
   }

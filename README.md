@@ -5,7 +5,7 @@
 - [x] [prettier](https://github.com/prettier/prettier) + eslint
 - [x] PWA support (by [Workbox](https://developers.google.com/web/tools/workbox/) & [pwacompat](https://github.com/GoogleChromeLabs/pwacompat))
 - [x] [TailwindCSS](https://tailwindcss.com/) & SASS
-- [x] Routing & code splitting (by [curi](https://github.com/pshrmn/curi))
+- [x] Routing & code splitting
 
 ## Usage
 

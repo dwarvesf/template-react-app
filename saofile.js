@@ -44,6 +44,7 @@ module.exports = {
       files: '**',
       filters: {
         'static/manifest.json': 'pwa',
+        'src/registerSW.js': 'pwa',
         'tailwind.js': 'tailwindcss',
         'src/styles/tailwind.scss': 'tailwindcss',
         'src/bundles/localize.js': 'i18n',
