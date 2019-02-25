@@ -5,10 +5,11 @@ import {
   addTranslation,
   addTranslationForLanguage,
   setActiveLanguage,
-  getTranslations,
-  getLanguages,
-  getOptions,
+  getTranslate,
   getActiveLanguage,
+  getLanguages,
+  getTranslations,
+  getOptions,
 } from 'react-localize-redux';
 import globalTranslations from '@/translations/global.json';
 
@@ -29,8 +30,9 @@ export default {
   doAddTranslation: addTranslation,
   doAddTranslationForLanguage: addTranslationForLanguage,
   doSetActiveLanguage: setActiveLanguage,
-  selectTranslations: ({ localize }) => getTranslations(localize),
-  selectLanguages: ({ localize }) => getLanguages(localize),
-  selectOptions: ({ localize }) => getOptions(localize),
+  selectTranslate: ({ localize }) => getTranslate(localize),
   selectActiveLanguage: ({ localize }) => getActiveLanguage(localize),
+  selectLanguages: ({ localize }) => getLanguages(localize),
+  selectTranslations: ({ localize }) => getTranslations(localize),
+  selectOptions: ({ localize }) => getOptions(localize),
 };
