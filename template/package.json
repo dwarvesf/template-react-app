@@ -1,29 +1,31 @@
 {
-  "name": "<%= _.folderName %>",
+  "name": "<%= context.outFolder %>",
   "scripts": {
-    "dev": "poi",
-    "build": "poi build",
-    "build:analyze": "poi build --bundle-report",
+    "dev": "poi --serve",
+    "build": "poi --prod",
+    "build:analyze": "poi --prod --bundle-report",
     "serve": "serve dist -l 8000",
     "lint": "eslint --ext .js,.jsx --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore ."
   },
-  "dependencies": {<% if (routing) { %>
-    "@curi/core": "^1.0.0-beta.35",
-    "@curi/react": "^1.0.0-beta.26",
-    "@curi/route-active": "^1.0.0-beta.6",
-    "@hickory/browser": "^1.0.0-beta.7",<% } %>
-    "@loadable/component": "^5.0.1",<% if (pwa) { %>
+  "dependencies": {
+    "@loadable/component": "^5.6.0",
+    "internal-nav-helper": "^1.1.0",
+    "money-clip": "^3.0.1",<% if (pwa) { %>
     "offline-plugin": "^5.0.3",<% } %>
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1"
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",<% if (i18n) { %>
+    "react-localize-redux": "^3.5.2",<% } %>
+    "redux-bundler": "^23.1.0",
+    "redux-bundler-react": "^1.1.0",<% if (pwa) { %>
+    "register-service-worker": "^1.6.2"<% } %>
   },
   "devDependencies": {
-    "@poi/plugin-bundle-report": "^10.0.1",
-    "@poi/plugin-eslint": "^10.0.2",<% if (pwa) { %>
-    "@poi/plugin-offline": "^10.0.1",<% } %>
+    "@poi/plugin-bundle-report": "^12.1.0",
+    "@poi/plugin-eslint": "^12.0.0",<% if (pwa) { %>
+    "@poi/plugin-pwa": "^12.0.3",<% } %>
+    "@svgr/webpack": "^4.1.0",
     "babel-eslint": "^8.2.3",
-    "babel-preset-poi": "^10.0.2",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
@@ -35,19 +37,16 @@
     "eslint-plugin-standard": "^3.0.1",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "poi": "^10.2.10",
+    "poi": "^12.5.5",
     "postcss-flexbugs-fixes": "^3.3.0",
     "postcss-safe-parser": "^4.0.1",
     "purgecss-webpack-plugin": "^1.2.0",
     "purgecss-whitelister": "^2.1.0",
-    "react-hot-loader": "^4.3.0",
+    "react-hot-loader": "^4.6.3",
+    "react-hot-loader-loader": "^0.0.7",
     "sass-loader": "^6.0.7",
-    "serve": "^10.0.2",<% if(tailwindcss) { %>
+    "serve": "^10.0.2",<% if (tailwindcss) { %>
     "tailwindcss": "^0.7.2",<% } %>
     "terser-webpack-plugin": "^1.1.0"
-  },
-  "resolutions": {
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1"
   }
 }
