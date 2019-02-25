@@ -2,10 +2,12 @@
 
 > React template for web app, powered by [Poi](https://poi.js.org/).
 
-- [x] [prettier](https://github.com/prettier/prettier) + eslint
 - [x] PWA support (by [Workbox](https://developers.google.com/web/tools/workbox/) & [pwacompat](https://github.com/GoogleChromeLabs/pwacompat))
+- [x] [Redux-bundler](https://reduxbundler.com/)
 - [x] [TailwindCSS](https://tailwindcss.com/) & SASS
 - [x] Routing & code splitting
+- [x] i18n support (by [react-localize-redux](https://github.com/ryandrewjohnson/react-localize-redux))
+- [x] [prettier](https://github.com/prettier/prettier) + eslint
 
 ## Usage
 
