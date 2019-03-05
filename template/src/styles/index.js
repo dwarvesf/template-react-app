@@ -1,3 +1,3 @@
-import './main.css';<% if(tailwindcss) { %>
+import './main.css';<% if (tailwindcss) { %>
 import './tailwind.scss';
 <% } %>

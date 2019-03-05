@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [
-    <% if(tailwindcss) { %>
+    <% if (tailwindcss) { %>
     require('tailwindcss')('./tailwind.js'),<% } %>
     require('postcss-flexbugs-fixes'),
     require('autoprefixer')({

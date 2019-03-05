@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: '@poi/bundle-report',
       options: { analyzerMode: 'static' },
-    },<% if(pwa) { %>
+    },<% if (pwa) { %>
     {
       resolve: '@poi/plugin-pwa',
       options: {},
@@ -35,7 +35,7 @@ module.exports = {
 
     const isEnvProduction = config.get('mode') === 'production';
     if (isEnvProduction) {
-      <% if(tailwindcss) { %>
+      <% if (tailwindcss) { %>
       // PurgeCSS plugin
       config
         .plugin('purgecss')
