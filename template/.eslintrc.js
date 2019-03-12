@@ -7,7 +7,12 @@ module.exports = {
     'prettier/react',
     'prettier/standard',
   ],
-  plugins: ['react', 'prettier', 'standard'],
+  plugins: [
+    'prettier',
+    'standard',
+    'react',
+    'react-hooks',
+  ],
   settings: {
     react: {
       version: '16.0',
@@ -25,6 +30,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    camelcase: 'off',
     'prettier/prettier': [
       'error',
       {
@@ -38,6 +44,7 @@ module.exports = {
       },
     ],
     'react/prop-types': 'off',
-    camelcase: 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
 };
