@@ -32,6 +32,12 @@ module.exports = {
       type: 'confirm',
       default: false,
     },
+    {
+      name: 'cljs',
+      message: 'ClojureScript integration?',
+      type: 'confirm',
+      default: false,
+    },
  ],
   templateData() {
     return {
@@ -49,6 +55,8 @@ module.exports = {
         'src/styles/tailwind.scss': 'tailwindcss',
         'src/bundles/localize.js': 'i18n',
         'src/translations/**': 'i18n',
+        'shadow-cljs.edn': 'cljs',
+        'cljs-src/**': 'cljs',
       },
     },
     {

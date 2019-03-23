@@ -9,6 +9,10 @@ import getStore from './bundles';
 import cache from './utils/cache';<% if (pwa) { %>
 import registerSW from './registerSW';<% } %>
 
+<% if (cljs) { %>if (process.env.NODE_ENV !== 'production') {
+  require('shadow-cljs/shadow.cljs.devtools.client.browser');
+}<% } %>
+
 const render = ({ store }) => {
   let app = <App />;<% if (i18n) { %>
   app = <LocalizeProvider store={store}>{app}</LocalizeProvider>;<% } %>
@@ -28,7 +32,10 @@ cache.getAll().then(initialData => {
   if (initialData) {
     console.log('starting with locally cache data:', initialData);
   }
-  render({ store: getStore(initialData) });
+  const renderApp = () => render({ store: getStore(initialData) });<% if (cljs) { %>
+  // exporting re-rendering function for live-reload cljs
+  window.renderApp = renderApp;<% } %>
+  renderApp();
 });
 
 <% if (pwa) { %>if (process.env.NODE_ENV === 'production') {

@@ -1,9 +1,15 @@
 {
   "name": "<%= context.outFolder %>",
-  "scripts": {
+  "scripts": {<% if (cljs) { %>
+    "dev": "concurrently --kill-others \"yarn dev:cljs\" \"yarn dev:js --no-clear-console\"",
+    "dev:js": "poi --serve",
+    "dev:cljs": "shadow-cljs watch app",
+    "build:js": "poi --prod",
+    "build:cljs": "shadow-cljs release app",
+    "build": "yarn build:cljs && yarn build:js",<% } else { %>
     "dev": "poi --serve",
-    "build": "poi --prod",
-    "build:analyze": "poi --prod --bundle-report",
+    "build": "poi --prod",<% } %>
+    "build:analyze": "yarn build --bundle-report",
     "serve": "serve dist -l 8000",
     "lint": "eslint --ext .js,.jsx --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore ."
@@ -14,7 +20,8 @@
     "money-clip": "^3.0.1",<% if (pwa) { %>
     "offline-plugin": "^5.0.3",<% } %>
     "react": "^16.8.3",
-    "react-dom": "^16.8.3",<% if (i18n) { %>
+    "react-dom": "^16.8.3",<% if (cljs) { %>
+    "react-is": "^16.8.3",<% } %><% if (i18n) { %>
     "react-localize-redux": "^3.5.2",<% } %>
     "redux-bundler": "^23.1.0",
     "redux-bundler-react": "^1.1.0"<% if (pwa) { %>,
@@ -25,7 +32,9 @@
     "@poi/plugin-eslint": "^12.0.0",<% if (pwa) { %>
     "@poi/plugin-pwa": "^12.0.3",<% } %>
     "@svgr/webpack": "^4.1.0",
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^8.2.3",<% if (cljs) { %>
+    "concurrently": "^3.5.1",
+    "shadow-cljs": "^2.8.21",<% } %>
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",

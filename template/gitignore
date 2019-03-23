@@ -6,6 +6,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+<% if (cljs) { %># shadow-cljs
+.shadow-cljs/
+.nrepl-port<% } %>
+
 # production build
 /dist
 

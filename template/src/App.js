@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'redux-bundler-react';
-import navHelper from 'internal-nav-helper';
+import navHelper from 'internal-nav-helper';<% if (cljs) { %>
+import { MyComponent } from 'shadow-cljs/app.core';<% } %>
 
 const navItems = [
   { url: '/', label: 'Home' },
@@ -29,6 +30,7 @@ const App = ({ doUpdateUrl, pathname, route: Page }) => {
           })}
         </ul>
       </nav>
+      <% if (cljs) { %><MyComponent className="py-8 text-center" /><% } %>
       <Page />
     </main>
   );

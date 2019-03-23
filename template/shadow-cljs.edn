@@ -1,0 +1,17 @@
+{:source-paths
+ ["cljs-src"]
+
+ :dependencies
+ [[cider/cider-nrepl "0.21.1"]
+  [org.clojure/tools.nrepl "0.2.13"]
+  [lilactown/hx "0.3.3"]]
+
+ :builds
+ {:app {:target :npm-module
+        :runtime :browser
+        :entries [app.core]
+        :output-dir "node_modules/shadow-cljs"
+        :devtools
+        {:autoload true
+         :http-root "public"
+         :http-port 8021}}}}
