@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'redux-bundler-react';
-import navHelper from 'internal-nav-helper';
+import { getNavHelper } from 'internal-nav-helper';
+import { useConnect } from '@/lib/redux-bundler-react';
 
 const navItems = [
   { url: '/', label: 'Home' },
@@ -8,9 +8,15 @@ const navItems = [
   { url: '/xyz', label: 'xyz' },
 ];
 
-const App = ({ doUpdateUrl, pathname, route: Page }) => {
+const App = () => {
+  const { doUpdateUrl, pathname, routeComponent: Page } = useConnect(
+    'selectRouteComponent',
+    'selectPathname',
+    'doUpdateUrl',
+  );
+
   return (
-    <main onClick={navHelper(doUpdateUrl)}>
+    <main onClick={getNavHelper(doUpdateUrl)}>
       <nav className="p-3 mb-4">
         <ul className="list-reset text-center">
           {navItems.map(item => {
@@ -34,9 +40,4 @@ const App = ({ doUpdateUrl, pathname, route: Page }) => {
   );
 };
 
-export default connect(
-  'selectRoute',
-  'selectPathname',
-  'doUpdateUrl',
-  App,
-);
+export default App

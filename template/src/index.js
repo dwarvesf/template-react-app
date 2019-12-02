@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'redux-bundler-react';<% if (i18n) { %>
+import { Provider } from '@/lib/redux-bundler-react';<% if (i18n) { %>
 import { LocalizeProvider } from 'react-localize-redux';<% } %>
 
 import './styles';

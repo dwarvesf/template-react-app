@@ -1,6 +1,4 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: 'src/index.js',
@@ -17,7 +15,10 @@ module.exports = {
       options: {},
     },<% } %>
   ],
+
   chainWebpack(config) {
+    const isEnvProduction = config.get('mode') === 'production';
+
     // remove default svg loader
     config.module.rules.delete('svg');
 
@@ -33,7 +34,26 @@ module.exports = {
         }));
     });
 
-    const isEnvProduction = config.get('mode') === 'production';
+    // linaria
+    config.module
+      .rule('js')
+      .use('linaria-loader')
+      .loader('linaria/loader')
+      .options({
+        sourceMap: !isEnvProduction,
+      });
+
+    // favicons
+    config.plugin('favicons').use(require('favicons-webpack-plugin'), [
+      {
+        logo: path.resolve(__dirname, './public/logo-128.png'),
+        favicons: {
+          developerName: null,
+          developerURL: null,
+        },
+      },
+    ]);
+
     if (isEnvProduction) {
       <% if (tailwindcss) { %>
       // PurgeCSS plugin
@@ -47,7 +67,7 @@ module.exports = {
       config.optimization.minimize(isEnvProduction);
       config.optimization
         .minimizer('terser')
-        .use(TerserPlugin, [
+        .use(require('terser-webpack-plugin'), [
           {
             terserOptions: {
               parse: {
@@ -75,7 +95,7 @@ module.exports = {
         ])
         .end()
         .minimizer('css')
-        .use(OptimizeCSSAssetsPlugin, [
+        .use(require('optimize-css-assets-webpack-plugin'), [
           {
             cssProcessorOptions: {
               parser: require('postcss-safe-parser'),
@@ -88,22 +108,9 @@ module.exports = {
   configureWebpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ({ resource }) => [
+      use: [
         {
           loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: [
-                {
-                  cleanupIDs: {
-                    prefix: `svg_${path.parse(resource).name}_${Math.random()
-                      .toString(36)
-                      .substr(2, 5)}_`,
-                  },
-                },
-              ],
-            },
-          },
         },
         'url-loader',
       ],

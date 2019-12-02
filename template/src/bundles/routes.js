@@ -1,12 +1,32 @@
-import { createRouteBundle } from 'redux-bundler';
-
+import { createRouteBundle, createSelector } from 'redux-bundler';
 import loadable from '@/utils/loadable';
-const Home = loadable(() => import('@/pages/Home'));
-const About = loadable(() => import('@/pages/About'));
-const NotFound = loadable(() => import('@/pages/NotFound'));
 
-export default createRouteBundle({
-  '/': Home,
-  '/about': About,
-  '*': NotFound,
+const bundle = createRouteBundle({
+  '/': {
+    name: 'Home',
+    C: loadable(() => import('@/pages/Home')),
+  },
+  '/about': {
+    name: 'About',
+    C: loadable(() => import('@/pages/About')),
+  },
+
+  '*': {
+    name:'NotFound',
+    C: loadable(() => import('@/pages/NotFound')),
+  },
 });
+
+bundle.selectRouteName = createSelector(
+  'selectRoute',
+  route => route.name,
+);
+
+bundle.selectRouteComponent = createSelector(
+  'selectRoute',
+  route => {
+    return route.C || (() => null);
+  },
+);
+
+export default bundle;

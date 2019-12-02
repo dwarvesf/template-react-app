@@ -6,9 +6,9 @@ import routes from './routes';<% if (i18n) { %>
 import localize from './localize';<% } %>
 
 export default composeBundles(
+  createCacheBundle({ cacheFn: cache.set }),
   createUrlBundle(),
   routes,
-  createCacheBundle(cache.set),
   extraArgs,<% if (i18n) { %>
   localize,<% } %>
 );

@@ -1,6 +1,8 @@
 {
-  "presets": ["poi/babel"],
+  "presets": ["poi/babel", "linaria/babel"],
   "plugins": [
+    "@babel/plugin-proposal-optional-chaining",
+    "babel-plugin-classnames",
     "react-hot-loader/babel"
   ]
 }
